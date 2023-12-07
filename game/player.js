@@ -8,6 +8,7 @@ import Enemy from './enemy.js';
 import Platform from './platform.js';
 import Collectible from './collectible.js';
 import ParticleSystem from '../engine/particleSystem.js';
+import Animation from "./animation.js"
 
 // Defining a class Player that extends GameObject
 class Player extends GameObject {
@@ -15,9 +16,11 @@ class Player extends GameObject {
   constructor(x, y) {
     super(x, y); // Call parent's constructor
     this.renderer = new Renderer('blue', 50, 50, Images.player); // Add renderer
+    this.animation = new Animation();
     this.addComponent(this.renderer);
     this.addComponent(new Physics({ x: 0, y: 0 }, { x: 0, y: 0 })); // Add physics
     this.addComponent(new Input()); // Add input for handling user input
+  
     // Initialize all the player specific properties
     this.direction = 1;
     this.lives = 3;
@@ -38,7 +41,8 @@ class Player extends GameObject {
     const input = this.getComponent(Input); // Get input component
 
     this.handleGamepadInput(input);
-    
+    this.animation.handleAnimation();
+
     // Handle player movement
     if (!this.isGamepadMovement && input.isKeyDown('ArrowRight')) {
       physics.velocity.x = 100;
@@ -204,6 +208,10 @@ class Player extends GameObject {
     this.lives = 3;
     this.score = 0;
     this.resetPlayerState();
+  }
+
+  #createAnimations(){
+    this.idleAnimation = new Animation("Idle (?).png", /*number of images */, /*how fast to animate */, /*which state it's for: PlayerStates.idle */)
   }
 }
 
