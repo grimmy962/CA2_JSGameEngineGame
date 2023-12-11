@@ -21,6 +21,9 @@ class Player extends GameObject {
     this.addComponent(new Physics({ x: 0, y: 0 }, { x: 0, y: 0 })); // Add physics
     this.addComponent(new Input()); // Add input for handling user input
   
+    this.state = PlayerStates.idle;
+    this.#createAnimations();
+
     // Initialize all the player specific properties
     this.direction = 1;
     this.lives = 3;
@@ -210,8 +213,68 @@ class Player extends GameObject {
     this.resetPlayerState();
   }
 
+  //getting an animation based on the state
+  draw(ctx){
+    const animation = this.animations.find((animation)=>animation.isFor(this.state));
+
+    const  image = animation.getImage();
+
+    const x = 100;
+    const y = 25;
+    ctx.drawImage(image, x, y);
+  }
+
   #createAnimations(){
-    this.idleAnimation = new Animation("Idle (?).png", /*number of images */, /*how fast to animate */, /*which state it's for: PlayerStates.idle */)
+    this.idleAnimation = new Animation(
+      "Idle (?).png",
+      3,
+      6, //the smaller the number the faster it will move, the bigger the number the slower it will move
+      PlayerStates.idle
+      );
+
+      this.runAnimation = new Animation(
+        "Run (?).png",
+        7,
+        6, 
+        PlayerStates.run
+        );
+
+      this.crouchAnimation = new Animation(
+        "Crouch (?).png",
+        7,
+        6, 
+        PlayerStates.crouch
+        );
+
+        this.hurtAnimation = new Animation(
+          "Hurt (?).png",
+          4,
+          6, 
+          PlayerStates.hurt
+          );
+          
+          this.kickAnimation = new Animation(
+            "Kick (?).png",
+            3,
+            6, 
+            PlayerStates.idle
+            );
+
+            this.animations = [
+              this.idleAnimation,
+              this.runAnimation,
+              this.crouchAnimation,
+              this.hurtAnimation,
+              this.kickAnimation,
+              this.deadAnimation
+            ];  
+
+            this.deadAnimation = new Animation(
+              "Hurt (?).png",
+              3,
+              6, 
+              PlayerStates.dead
+              );
   }
 }
 
