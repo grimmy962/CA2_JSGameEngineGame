@@ -10,6 +10,8 @@ import Collectible from './collectible.js';
 import ParticleSystem from '../engine/particleSystem.js';
 import Animation from "./animation.js"
 
+//fix the code below
+
 // Defining a class Player that extends GameObject
 class Player extends GameObject {
   // Constructor initializes the game object and add necessary components

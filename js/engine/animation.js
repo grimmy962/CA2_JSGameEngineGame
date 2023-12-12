@@ -1,5 +1,6 @@
 import img from "./img.js";
 
+//fix the code below
 export default class Animation{
     images = [];
     constructor (fileNameTemplate, numberOfImages, timerCount, state, stopAtEnd){
