@@ -9,6 +9,17 @@ import Collectible from './collectible.js';
 // Define a class Level that extends the Game class from the engine
 class Level extends Game {
   
+  "backgrounds":[
+    {
+      "tile": "sky,
+      "ranges": [
+        [
+          0, 25, 0, 14
+        ]
+      ]
+    }
+  ]
+  }
   // Define the constructor for this class, which takes one argument for the canvas ID
   constructor(canvasId) {
     // Call the constructor of the superclass (Game) with the canvas ID
