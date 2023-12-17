@@ -3,7 +3,8 @@ import GameObject from '../engine/gameobject.js';
 import Renderer from '../engine/renderer.js';
 import Physics from '../engine/physics.js';
 import Input from '../engine/input.js';
-import { Images } from '../engine/resources.js';
+import { Images } from '../engine/img.js';
+import { AudioFiles } from '../engine/sounds.js'; 
 import Enemy from './enemy.js';
 import Platform from './platform.js';
 import Collectible from './collectible.js';
@@ -24,12 +25,19 @@ class Player extends GameObject {
     this.score = 0;
     this.isOnPlatform = false;
     this.isJumping = false;
-    this.jumpForce = 400;
+    this.jumpForce = 250;
     this.jumpTime = 0.3;
     this.jumpTimer = 0;
     this.isInvulnerable = false;
     this.isGamepadMovement = false;
     this.isGamepadJump = false;
+
+    //soundsss
+    this.walk = AudioFiles.walk;
+    this.jump = AudioFiles.jump;
+    this.kick = AudioFiles.kick;
+    this.crouch = AudioFiles.crouch;
+    this.collectible = AudioFiles.collectible; // Fix typo in variable name
   }
 
   // The update function runs every frame and contains game logic
@@ -40,19 +48,36 @@ class Player extends GameObject {
     this.handleGamepadInput(input);
     
     // Handle player movement
-    if (!this.isGamepadMovement && input.isKeyDown('ArrowRight')) {
+    if (!this.isGamepadMovement && (input.isKeyDown('ArrowRight') || input.isKeyDown('d'))) {
       physics.velocity.x = 100;
       this.direction = -1;
-    } else if (!this.isGamepadMovement && input.isKeyDown('ArrowLeft')) {
+    } else if (!this.isGamepadMovement && (input.isKeyDown('ArrowLeft') || input.isKeyDown('a'))) {
       physics.velocity.x = -100;
       this.direction = 1;
     } else if (!this.isGamepadMovement) {
       physics.velocity.x = 0;
     }
 
+    //handle player crouch
+    if (input.isKeyDown('ArrowDown') || input.isKeyDown('s')) { 
+      this.renderer.height = 25;
+      this.renderer.width = 50;
+      this.y = this.game.canvas.height - 25;
+      this.crouch.play();
+    } else {
+      this.renderer.height = 50;
+      this.renderer.width = 50;
+      this.y = this.game.canvas.height - 50;
+    }
+
+    //handle player kick
+    if (input.isKeyDown('e') || input.isMouseButtonDown('left')) {
+      this.kick.play();
+    }
     // Handle player jumping
-    if (!this.isGamepadJump && input.isKeyDown('ArrowUp') && this.isOnPlatform) {
+    if (!this.isGamepadJump && (input.isKeyDown('ArrowUp') || input.isKeyDown(' ')) && this.isOnPlatform) {
       this.startJump();
+      this.jump.play();
     }
 
     if (this.isJumping) {
@@ -65,6 +90,7 @@ class Player extends GameObject {
       if (physics.isColliding(collectible.getComponent(Physics))) {
         this.collect(collectible);
         this.game.removeGameObject(collectible);
+        this.collectible.play(); // Fix typo in variable name
       }
     }
   
@@ -73,6 +99,8 @@ class Player extends GameObject {
     for (const enemy of enemies) {
       if (physics.isColliding(enemy.getComponent(Physics))) {
         this.collidedWithEnemy();
+        this.kick.play();
+        
       }
     }
   
@@ -183,7 +211,7 @@ class Player extends GameObject {
 
   emitCollectParticles() {
     // Create a particle system at the player's position when a collectible is collected
-    const particleSystem = new ParticleSystem(this.x, this.y, 'yellow', 20, 1, 0.5);
+    const particleSystem = new ParticleSystem(this.x, this.y, 'purple', 20, 1, 0.5);
     this.game.addGameObject(particleSystem);
   }
 

@@ -7,8 +7,8 @@ import Renderer from '../engine/renderer.js';
 // Import the Physics class from the 'engine' directory
 import Physics from '../engine/physics.js';
 
-// Import the Images object from the 'engine' directory. This object contains all the game's image resources
-import {Images} from '../engine/resources.js';
+// Import the Images object from the 'engine' directory. This object contains all the game's image
+import {Images} from '../engine/img.js';
 
 // Import the Player and Platform classes from the current directory
 import Player from './player.js';

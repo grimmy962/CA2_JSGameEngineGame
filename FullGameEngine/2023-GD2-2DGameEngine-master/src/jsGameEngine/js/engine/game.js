@@ -1,6 +1,5 @@
 // This class depends on the Camera, which is a separate module and needs to be imported.
 import Camera from './camera.js';
-import TileMap from './tileMap.js';
 
 // The Game class is responsible for setting up and managing the main game loop.
 class Game {
@@ -25,7 +24,7 @@ class Game {
     window.addEventListener('resize', () => this.resizeCanvas());
     // Instantiate a new camera without a target and with dimensions equal to the canvas size.
     this.camera = new Camera(null, this.canvas.width, this.canvas.height);
-    this.tileMap = new TileMap(this.tileSize);
+ 
   }
 
   // This method resizes the canvas to fill the window, with a small margin.
