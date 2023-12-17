@@ -23,7 +23,7 @@ const AudioFiles = {
     jump:new Audio('./resources/audio/jump.mp3'),
     kick:new Audio('./resources/audio/kick.mp3'),
     crouch:new Audio('./resources/audio/crouch.mp3'),
-    collectible:new Audio('./resources/audio/collectible.mp3'),
+    collectible:new Audio('./resources/audio/collectible.mp3')
    /* enemyDie:new Audio('./resources/audio/enemyDie.mp3'),
     enemyHit:new Audio('./resources/audio/enemyHit.mp3'),
     enemyShoot:new Audio('./resources/audio/enemyShoot.mp3'),
@@ -45,4 +45,4 @@ class Sound {
     }
 */
 
-export { AudioFiles}; // Export the AudioFiles and Sound classes as named exports of this module
+export default { AudioFiles}; // Export the AudioFiles class as named export of this module
