@@ -6,3 +6,4 @@ const game = new Level('gameCanvas');
 
 // Start the game by calling the start method of the Level instance.
 game.start();
+

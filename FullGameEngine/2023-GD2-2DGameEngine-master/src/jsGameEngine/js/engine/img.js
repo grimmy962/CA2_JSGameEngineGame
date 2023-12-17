@@ -1,14 +1,7 @@
-import Image from 'canvas'; // Import the Image class from the canvas package.
-
 const Images = {
-  player: new Image(), // The Image instance for the player.
-  enemy: new Image(), // The Image instance for the enemy.
+  player: new Image('./resources/images/player/DinoSprites - mort_00.png'), // The Image instance for the player.
+  enemy: new Image('./resources/images/enemy/tile000.png'), // The Image instance for the enemy.
 };
 
-// Set the source of the player image.
-Images.player.src = './resources/images/player/DinoSprites - mort_00.png'; // Update the image path
-
-// Set the source of the enemy image.
-Images.enemy.src = './resources/images/enemy/tile000.png'; // Update the image path
 
 export { Images }; // Export the Images object correctly.

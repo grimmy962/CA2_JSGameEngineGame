@@ -6,7 +6,7 @@ class Game {
   // The constructor initializes a new instance of the Game class.
   constructor(canvasId) {
     // The canvas HTML element where the game will be drawn.
-    this.canvas = document.getElementById("gameCanvas");
+    this.canvas = document.getElementById("canvasId");
     // The 2D rendering context for the canvas, which is used for drawing.
     this.ctx = this.canvas.getContext('2d');
     // An array to hold all the game objects that are currently in the game.
@@ -17,7 +17,6 @@ class Game {
     this.lastFrameTime = 0;
     // The amount of time that passed between the last frame and the current frame.
     this.deltaTime = 0;
-    this.tileSize = 32;
     // Adjust the size of the canvas to match the window size.
     this.resizeCanvas();
     // Add an event listener to resize the canvas whenever the window size changes.
@@ -58,7 +57,7 @@ class Game {
 
   // This method updates all the game objects.
   update() {
-    setInterval(gameLoop, 1000/60);
+    //setInterval(gameLoop, 1000/60);
     // Call each game object's update method with the delta time.
     for (const gameObject of this.gameObjects) {
       gameObject.update(this.deltaTime);

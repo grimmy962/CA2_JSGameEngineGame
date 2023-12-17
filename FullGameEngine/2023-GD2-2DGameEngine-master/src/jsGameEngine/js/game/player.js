@@ -4,7 +4,7 @@ import Renderer from '../engine/renderer.js';
 import Physics from '../engine/physics.js';
 import Input from '../engine/input.js';
 import { Images } from '../engine/img.js';
-import { AudioFiles } from '../engine/sound.js'; 
+import AudioFiles from '../engine/sound.js'; // Import the AudioFiles object from the 'engine' directory
 import Enemy from './enemy.js';
 import Platform from './platform.js';
 import Collectible from './collectible.js';

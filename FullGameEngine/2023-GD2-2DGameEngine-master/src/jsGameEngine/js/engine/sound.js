@@ -45,4 +45,4 @@ class Sound {
     }
 */
 
-export default { AudioFiles}; // Export the AudioFiles class as named export of this module
+export default {AudioFiles}; // Export the AudioFiles class as named export of this module
