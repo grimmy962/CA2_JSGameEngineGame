@@ -42,7 +42,7 @@ class Sound {
     // The play method plays the audio file
     play() {
         this.audioFile.play();
-    }
+    };
 */
 
-export default {AudioFiles}; // Export the AudioFiles class as named export of this module
+export {AudioFiles}; // Export the AudioFiles class as named export of this module

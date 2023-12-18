@@ -1,4 +1,4 @@
-// This class depends on the Component, which is a separate module and needs to be imported.
+// Import the Component module.
 import Component from './component.js';
 
 // The Input class is responsible for handling keyboard and gamepad input.
@@ -7,16 +7,23 @@ class Input extends Component {
   constructor() {
     // Call the constructor of the parent class (Component).
     super();
+
     // An object to store the state of each key. The keys are the keyboard key codes, and the values are boolean indicating whether the key is down.
     this.keys = {};
+
     // The index of the gamepad that this input component is listening to.
     this.gamepadIndex = null;
 
     // Add event listeners for the keydown and keyup events.
     // When a keydown event is fired, the corresponding key in the keys object is set to true.
     // When a keyup event is fired, the corresponding key in the keys object is set to false.
-    document.addEventListener('keydown', (event) => (this.keys[event.code] = true));
-    document.addEventListener('keyup', (event) => (this.keys[event.code] = false));
+    document.addEventListener('keydown', (event) => {
+      this.keys[event.code] = true;
+    });
+
+    document.addEventListener('keyup', (event) => {
+      this.keys[event.code] = false;
+    });
 
     // Add event listeners for the gamepadconnected and gamepaddisconnected events.
     // When a gamepadconnected event is fired, the gamepadIndex property is set to the index of the connected gamepad.
@@ -25,6 +32,7 @@ class Input extends Component {
       console.log('Gamepad connected:', event.gamepad);
       this.gamepadIndex = event.gamepad.index;
     });
+
     window.addEventListener('gamepaddisconnected', (event) => {
       console.log('Gamepad disconnected:', event.gamepad);
       this.gamepadIndex = null;
