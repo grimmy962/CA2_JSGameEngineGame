@@ -1,5 +1,8 @@
 CA2 JS Game
 
+youtube video:
+https://www.youtube.com/watch?v=nfgiEcjcF00
+
 inspiration:
 
 https://poki.com/en/g/dana-relics-for-sale
